@@ -1,0 +1,194 @@
+﻿<Window x:Class="Part_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Part_2"
+        mc:Ignorable="d"
+        Title="Cybersecurity Chatbot" Height="450" Width="800"
+        Background="#1E1E24">
+
+    <Window.Resources>
+        <!-- Default style for all TextBlocks -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#F5F5F5"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <!-- Custom button style -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#D81B60"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#AD1457"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Custom textox style-->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#2D2D37"/>
+            <Setter Property="Foreground" Value="#F5F5F5"/>
+            <Setter Property="BorderBrush" Value="#D81B60"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <!-- Required textbox content area -->
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+         <!---Main layout grid-->
+    <Grid>
+
+        <!-- Welcome Screen -->
+        <Grid x:Name="WelcomeGrid">
+
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <!---App logo-->
+                <Image Source="/Logo.jpeg"
+                       Width="550"
+                       Height="300"
+                       Margin="25"/>
+
+                <Button Content="Start"
+                        Width="200"
+                        Height="45"
+                        Click="Start_Click"/>
+            </StackPanel>
+
+        </Grid>
+
+        <!-- Name input screen -->
+        <Grid x:Name="NameGrid"
+              Visibility="Collapsed">
+
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+             <!---Ask user for name-->
+                <TextBlock Text="Enter your name"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Margin="15"
+                           HorizontalAlignment="Center"/>
+
+                <TextBox x:Name="NameTextBox"
+                         Width="300"
+                         Height="45"
+                         Margin="15"/>
+                  <!---Error message display-->
+                <TextBlock x:Name="ErrorText"
+                           Foreground="Red"
+                           Margin="5"
+                           TextAlignment="Center"/>
+             <!---Submit button-->
+                <Button Content="Submit"
+                        Width="300"
+                        Height="45"
+                        Click="Submit_Click"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <!-- Chat Screen -->
+        <Grid x:Name="ChatGrid"
+              Visibility="Collapsed">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0"
+                          VerticalScrollBarVisibility="Auto"
+                          Margin="15">
+
+                <!-- Main chat layout -->
+                <Grid Grid.Row="0" Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                   <!---ASCII Logo-->
+                    <TextBlock x:Name="LogoText"
+           FontFamily="Consolas"
+           FontSize="14"
+           FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#00FFFF" Offset="0"/>
+                                <GradientStop Color="#00FF88" Offset="0.5"/>
+                                <GradientStop Color="#0080FF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                 <!---Chat display area-->
+                    <TextBox x:Name="ChatListBox"
+             Grid.Row="1"
+             IsReadOnly="True"
+             TextWrapping="Wrap"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Auto"
+             FontSize="14"
+             FontFamily="Consolas"
+             Background="#15151C"
+             BorderBrush="#2D2D37"
+             Padding="10"/>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Bottom input area -->
+            <Grid Grid.Row="1" Margin="15,0,15,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="InputTextBox"
+                         Grid.Column="0"
+                         Height="45"
+                         Margin="0,0,10,0"/>
+
+                <Button Content="Send"
+                        Grid.Column="1"
+                        Width="100"
+                        Height="45"
+                        Click="Send_Click"/>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+
+</Window>
