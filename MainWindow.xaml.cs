@@ -578,7 +578,7 @@ namespace Part_2
             QuizScorePanel.Visibility = Visibility.Collapsed;
         }
 
-        // Activity log methods
+        // Activity log methods again
         private void RefreshLogs()
         {
             TryDatabaseAction(() => {
