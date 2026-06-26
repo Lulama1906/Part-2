@@ -578,7 +578,7 @@ namespace Part_2
             QuizScorePanel.Visibility = Visibility.Collapsed;
         }
 
-        // Activity log methods again
+        // Activity log methods
         private void RefreshLogs()
         {
             TryDatabaseAction(() => {
@@ -593,7 +593,7 @@ namespace Part_2
             }, "Load more history logs");
         }
 
-        // Track tab changes
+        // Track tab changes p
         private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.Source is TabControl && !string.IsNullOrEmpty(userName))
