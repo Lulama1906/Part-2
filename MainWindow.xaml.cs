@@ -583,7 +583,7 @@ namespace Part_2
         {
             TryDatabaseAction(() => {
                 LogListBox.ItemsSource = logManager.GetLogs();
-            }, "Refresh activity log");
+            },    "Refresh activity log");
         }
 
         private void ShowMoreLogs_Click(object sender, RoutedEventArgs e)
